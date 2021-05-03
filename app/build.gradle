@@ -15,8 +15,34 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "TYPE", '"RELEASE"'
+        }
+        debug {
+            versionNameSuffix "-debug"
+            buildConfigField "String", "TYPE", '"DEBUG"'
+        }
+        staging {
+            initWith debug
+            versionNameSuffix "-staging"
+        }
+        beta {
+            initWith debug
+            versionNameSuffix "-beta"
+            buildConfigField "String", "TYPE", '"BETA"'
         }
     }
+    flavorDimensions 'version'
+    productFlavors {
+        freeConfig {
+            dimension 'version'
+            versionNameSuffix '.free'
+        }
+        paidConfig {
+            dimension 'version'
+            versionNameSuffix '.paid'
+        }
+    }
+
 }
 
 
